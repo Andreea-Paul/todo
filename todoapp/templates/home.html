@@ -31,11 +31,41 @@
         </div>
     </div>
 </nav>
-    <section class="section">
-        <div class="container">
-            <h1 class="title">
-                Hello from home.html
-            </h1>
-        </div>
-    </section>
+<section class="section">
+    <table class="table is-hoverable is-fullwidth">
+        <thead>
+        <tr>
+            <th>Task</th>
+            <th>Completed</th>
+            <th>Date Created</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        {% for todo in todos %}
+            <tr>
+                <td>
+                    {% if todo.completed == True %}
+                        <span style="text-decoration: line-through">{{ todo.task }}</span>
+                    {% else %}
+                        {{ todo.task }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if todo.completed == True %}
+                        <i class="far fa-check-circle"></i> {{ todo.completed }}
+                    {% else %}
+                        <i class="far fa-circle"></i> {{ todo.completed }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ todo.created}}
+                </td>
+                
+                <td>
+                    Remove Task
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</section>
 {% endblock %}
