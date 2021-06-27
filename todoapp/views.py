@@ -17,7 +17,7 @@ def home(request):
         todos = Todo.objects.all()
         return render(request, 'home.html', {'todos': todos})
 
-def delete(request, todo_id):
+def delete_task(request, todo_id):
     todo = Todo.objects.get(id=todo_id)
     todo.delete()
     messages.success(request, ('Task has been Deleted!'))
@@ -35,3 +35,16 @@ def mark_incomplete(request, todo_id):
     todo.completed = False
     todo.save()
     return redirect('home')
+
+def edit_task(request, todo_id):
+    if request.method == 'POST':
+        todo = Todo.objects.get(id=todo_id)
+        form = TodoForm(request.POST or None, instance=todo)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Task has been edited!'))
+            return redirect('home')
+    else:
+        todo = Todo.objects.get(id=todo_id)
+        return render(request, 'edit.html', {'todo': todo})    

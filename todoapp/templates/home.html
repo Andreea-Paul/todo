@@ -59,8 +59,11 @@
                 <td>
                     {% if todo.completed == True %}
                         <span style="text-decoration: line-through">{{ todo.task }}</span>
+                        
                     {% else %}
+                        <a href="{% url 'edit' todo.id %}">
                         {{ todo.task }}
+                        </a>
                     {% endif %}
                 </td>
                 <td>
