@@ -23,3 +23,15 @@ def delete(request, todo_id):
     messages.success(request, ('Task has been Deleted!'))
     return redirect('home')      
 
+def mark_complete(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    todo.completed = True
+    todo.save()
+    return redirect('home')
+
+
+def mark_incomplete(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    todo.completed = False
+    todo.save()
+    return redirect('home')
