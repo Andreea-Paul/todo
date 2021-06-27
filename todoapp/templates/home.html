@@ -73,9 +73,8 @@
                 <td>
                     {{ todo.created}}
                 </td>
-                
                 <td>
-                    Remove Task
+                    <a href="{% url 'delete' todo.id %}">Remove</a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Todo
 from .forms import TodoForm
 from django.contrib import messages
@@ -16,3 +16,10 @@ def home(request):
     else:
         todos = Todo.objects.all()
         return render(request, 'home.html', {'todos': todos})
+
+def delete(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    todo.delete()
+    messages.success(request, ('Task has been Deleted!'))
+    return redirect('home')      
+
