@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login, logout
 from .models import Todo
-from .forms import TodoForm
+from .forms import LoginForm, TodoForm 
 from django.contrib import messages
 
 # Create your views here.
@@ -48,3 +49,24 @@ def edit_task(request, todo_id):
     else:
         todo = Todo.objects.get(id=todo_id)
         return render(request, 'edit.html', {'todo': todo})    
+
+def login_view(request):
+    error_message = None
+    if request.method == "POST":
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                messages.info(request, "User loged-in")
+                return redirect('home')
+            else:
+                messages.error(request, "Username/password is wrong")
+    form = LoginForm()
+    return render(request, "login_page.html", {"form": form})  
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')          
