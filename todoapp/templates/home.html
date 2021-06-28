@@ -60,7 +60,7 @@
             <th>Delete</th>
         </tr>
         </thead>
-        {% for todo in todos %}
+        {% for todo in user.todo_set.all %}
             <tr>
                 <td>
                     {% if todo.completed == True %}

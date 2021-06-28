@@ -7,13 +7,15 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required(login_url='/')
-def home(request):
+def home(request, ):
     if request.method == 'POST':
         form = TodoForm(request.POST or None)
 
         if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = request.user
             form.save()
-            todos = Todo.objects.all()
+            todos = Todo.objects.all
             messages.success(request, ('Task has been added!'))
             return render(request, 'home.html', {'todos': todos})
     else:
@@ -22,7 +24,7 @@ def home(request):
 
 @login_required(login_url='/')
 def delete_task(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
+    todo = Todo.objects.get(id=todo_id, user=request.user)
     todo.delete()
     messages.success(request, ('Task has been Deleted!'))
     return redirect('home')      
