@@ -50,5 +50,18 @@
         </p>
     </div>    
 </form>
+<div>
+    
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div style="color:red">
+            {{ message }}
+        </div>
+        {% else %}
+            {{ message }}
+        {% endif %}
+    {% endfor %}
 </div>
+</div>
+
 {% endblock %}
