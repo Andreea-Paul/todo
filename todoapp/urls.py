@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import delete_task, edit_task, home, login_view, logout_view, mark_complete, mark_incomplete 
+from .views import delete_task, edit_task, home, login_view, logout_view, mark_complete, mark_incomplete,change_password
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('edit/<int:todo_id>', edit_task, name="edit"),
     path('', login_view, name="login" ),
     path('logout', logout_view, name="logout"),
+    path('password', change_password, name='change_password'),
 ]

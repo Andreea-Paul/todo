@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .models import Todo
 from .forms import LoginForm, TodoForm 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -77,3 +79,20 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')          
+
+@login_required(login_url='/')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Your old password/confirm new password is incorrect')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })    
