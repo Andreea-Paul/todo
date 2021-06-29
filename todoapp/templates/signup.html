@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                To Do App
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div style="text-align: left;padding-left: 600px;padding-right: 600px; height: 620px;">
+<h1 style="font-size: 30px;height: 70px;">Sign up</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }} 
+        <br>
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        </br>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    
+    <div  class="field">
+      <p class="control">
+        <button class="button is-success">
+          Signup
+        </button>
+      </p>
+     </div> 
+   
+  </form>
+  <a href="{% url 'login' %}">Already have an account ? Please login</a>  
+</div>  
+{% endblock %}
