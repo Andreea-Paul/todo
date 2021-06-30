@@ -17,7 +17,7 @@
     </div>
 </nav>
 
-<div style="text-align: left;padding-left: 600px;padding-right: 600px; height: 620px;">
+<div style="text-align: left;padding-left: 600px;padding-right: 600px; height: 630px;color: green">
 <h1 style="font-size: 30px;height: 70px;">Sign up</h1>
   <form method="post">
     {% csrf_token %}
@@ -27,7 +27,7 @@
         {{ field }} 
         <br>
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
+          <small style="color:green">{{ field.help_text }}</small>
         {% endif %}
         </br>
         {% for error in field.errors %}
