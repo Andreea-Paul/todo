@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .models import Todo
-from .forms import LoginForm, TodoForm, SignUpForm
+from .forms import LoginForm, TodoForm
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -100,14 +100,17 @@ def change_password(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            messages.success(request, 'You registered succesfully!')
             return redirect('home')
+        else:    
+            messages.error(request, "Your passwords don't match!")
     else:
-        form = SignUpForm()
+        form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
