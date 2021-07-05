@@ -1,9 +1,17 @@
 version: '3.7'
 services:
+    db:
+        image: postgres:12.2
+        env_file: .env
     console:
         build: .
+        env_file: .env
         volumes:
             - .:/todo
         ports:
             - 8000:8000
-        command: python manage.py runserver 0.0.0.0:8000s
+        command: python manage.py runserver 0.0.0.0:8000
+        depends_on: 
+            - db
+        links:
+            - db    
