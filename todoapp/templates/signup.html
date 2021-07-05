@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<nav class="navbar is-light" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-            
-        </a>
-    </div>
-
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-menu">
         <div class="navbar-start">
             <a class="navbar-item">
@@ -17,7 +11,7 @@
     </div>
 </nav>
 
-<div style="text-align: left;padding-left: 600px;padding-right: 600px; height: 630px;">
+<div style="text-align: left;padding-left: 600px;padding-right: 600px; height: 635px;">
 <h1 style="font-size: 30px;height: 70px;">Register</h1>
   <form method="post">
     {% csrf_token %}
@@ -48,7 +42,7 @@
     </div>  
     <div  class="field">
       <p class="control">
-        <button class="button is-success">
+        <button class="button is-link">
           Register
         </button>
       </p>
@@ -65,6 +59,6 @@
         {% endif %}
     {% endfor %}
     </div>   
-<a href="{% url 'login' %}">Already have an account ? Please login</a>  
+<a href="{% url 'login' %}">Already have an account ? Please login now!</a>  
 </div>  
 {% endblock %}
