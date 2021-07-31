@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/')
 def home(request):
+    
     if request.method == 'POST':
         form = TodoForm(request.POST or None)
 
