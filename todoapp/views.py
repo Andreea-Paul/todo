@@ -36,6 +36,7 @@ def mark_complete(request, todo_id):
     todo = Todo.objects.get(id=todo_id)
     todo.completed = True
     todo.save()
+    messages.success(request, ('Task has marked as done!'))
     return redirect('home')
 
 @login_required(login_url='/')
@@ -43,6 +44,7 @@ def mark_incomplete(request, todo_id):
     todo = Todo.objects.get(id=todo_id)
     todo.completed = False
     todo.save()
+    messages.success(request, ('Task has been marked as incomplete!'))
     return redirect('home')
 
 @login_required(login_url='/')
@@ -109,7 +111,7 @@ def signup(request):
             messages.success(request, 'You registered succesfully!')
             return redirect('home')
         else:    
-            messages.error(request, "Your passwords don't match/ username already used!")
+            messages.error(request, "Your password doesn't meet the requierments/ the confirm password doesn't match/ username already used!")
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
