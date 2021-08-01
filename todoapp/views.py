@@ -10,21 +10,26 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/')
 def home(request):
-    
+    todos = Todo.objects.all()
+    return render(request, 'home.html', {'todos': todos})
+
+@login_required(login_url='/')
+def add_task(request):
     if request.method == 'POST':
-        form = TodoForm(request.POST or None)
-
-        if form.is_valid():
-            obj = form.save(commit=False)
+        todo_form = TodoForm(request.POST or None)
+        if todo_form.is_valid():
+            obj = todo_form.save(commit=False)
             obj.user = request.user
-            form.save()
-            todos = Todo.objects.all
+            todo_form.save()
             messages.success(request, ('Task has been added!'))
-            return render(request, 'home.html', {'todos': todos})
-    else:
-        todos = Todo.objects.all()
-        return render(request, 'home.html', {'todos': todos})
-
+            return redirect('home')
+        else:
+            messages.error(request, 'Error saving form')    
+    todo_form = TodoForm()
+         
+    return render(request, 'add_task.html', {'todo_form': todo_form})
+            
+            
 @login_required(login_url='/')
 def delete_task(request, todo_id):
     todo = Todo.objects.get(id=todo_id, user=request.user)
@@ -58,9 +63,8 @@ def edit_task(request, todo_id):
             form.save()
             messages.success(request, ('Task has been edited!'))
             return redirect('home')
-    else:
-        todo = Todo.objects.get(id=todo_id)
-        return render(request, 'edit.html', {'todo': todo})    
+    todo_form = TodoForm()
+    return render(request, 'edit.html', {'todo_form': todo_form})        
 
 def login_view(request):
     error_message = None

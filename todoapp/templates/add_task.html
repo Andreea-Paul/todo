@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+{% block content %}
+<a href="{% url 'home' %}"><b>Back</b></a>
+
+<div style='text-align: left;padding-left: 570px;padding-right: 570px; height: 635px;'>
+    <h1 style="font-size: 30px;height: 70px;"><b>Add task</b></h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="control">
+            <input class="input" name ="task" type="text" placeholder="Add Task">
+        </div>
+        <p>Choose a category:
+        {{ todo_form.category}} 
+        </p>
+        <div class="field">
+            <p class="control">
+              <button class="button is-link">
+                Add Task
+              </button>
+            </p>
+        </div> 
+    </form>
+    
+{% endblock %}
