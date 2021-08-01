@@ -9,9 +9,14 @@
         <div class="control">
             <input class="input" name ="task" type="text" placeholder="Add Task">
         </div>
-        <p>Choose a category:
-        {{ todo_form.category}} 
+        <p>Choose a category for your task:
+          {{ todo_form.category}} 
         </p>
+        <p>
+          Choose a due date for your task:
+          {{ todo_form.due_date  }}
+        </p>
+        
         <div class="field">
             <p class="control">
               <button class="button is-link">

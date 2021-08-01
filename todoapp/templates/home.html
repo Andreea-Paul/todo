@@ -38,6 +38,7 @@
             <th>Category</th>
             <th>Completed</th>
             <th>Date Created</th>
+            <th>Date Due</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -68,6 +69,10 @@
                 <td>
                     {{ todo.created}}
                 </td>
+                <td>
+                    {{ todo.due_date }}
+                </td>
+                
                 <td>
                     <a href="{% url 'delete' todo.id %}">Remove</a>
                 </td>
