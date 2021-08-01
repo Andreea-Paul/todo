@@ -15,6 +15,7 @@ def home(request):
 
 @login_required(login_url='/')
 def add_task(request):
+    todo_form = TodoForm()
     if request.method == 'POST':
         todo_form = TodoForm(request.POST or None)
         if todo_form.is_valid():
@@ -23,10 +24,6 @@ def add_task(request):
             todo_form.save()
             messages.success(request, ('Task has been added!'))
             return redirect('home')
-        else:
-            messages.error(request, 'Error saving form')    
-    todo_form = TodoForm()
-         
     return render(request, 'add_task.html', {'todo_form': todo_form})
             
             
@@ -55,16 +52,15 @@ def mark_incomplete(request, todo_id):
 
 @login_required(login_url='/')
 def edit_task(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    todo_form = TodoForm(instance=todo)
     if request.method == 'POST':
-        todo = Todo.objects.get(id=todo_id)
-        form = TodoForm(request.POST or None, instance=todo)
-
-        if form.is_valid():
-            form.save()
+       todo_form = TodoForm(request.POST or None, instance=todo)
+       if todo_form.is_valid():
+            todo_form.save()
             messages.success(request, ('Task has been edited!'))
             return redirect('home')
-    todo_form = TodoForm()
-    return render(request, 'edit.html', {'todo_form': todo_form})        
+    return render(request, 'edit.html', {'todo_form':todo_form})      
 
 def login_view(request):
     error_message = None

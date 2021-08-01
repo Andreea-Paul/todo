@@ -1,7 +1,5 @@
 {% extends "base.html" %} 
 {% block content %}
-<a href="{% url 'home' %}"><b>Back</b></a>
-
 <div style='text-align: left;padding-left: 570px;padding-right: 570px; height: 635px;'>
     <h1 style="font-size: 30px;height: 70px;"><b>Add task</b></h1>
     <form method="POST" action="">
@@ -25,5 +23,9 @@
             </p>
         </div> 
     </form>
+    {% if request.user.is_authenticated %}
+    <a class="button" href="{% url 'home' %}">Back</a>
+    {% endif %}        
+</div>    
     
 {% endblock %}
