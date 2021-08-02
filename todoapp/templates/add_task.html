@@ -1,24 +1,23 @@
 {% extends "base.html" %} 
 {% block content %}
 <div style='text-align: left;padding-left: 570px;padding-right: 570px; height: 635px;'>
-    <h1 style="font-size: 30px;height: 70px;"><b>Add task</b></h1>
+    <h1 style="font-size: 30px;height: 70px;"><b>Add Task</b></h1>
     <form method="POST" action="">
         {% csrf_token %}
         <div class="control">
-            <input class="input" name ="task" type="text" placeholder="Add Task">
+            <input class="input" name ="task" type="text" placeholder="Write your task here">
         </div>
         <p>Choose a category for your task:
-          {{ todo_form.category}} 
+          {{ todo_form.category }} 
         </p>
         <p>
           Choose a due date for your task:
-          {{ todo_form.due_date  }}
+          {{ todo_form.due_date }}
         </p>
-        
         <div class="field">
             <p class="control">
               <button class="button is-link">
-                Add Task
+                Add 
               </button>
             </p>
         </div> 
@@ -38,5 +37,4 @@
       {% endfor %}
     </div>       
 </div>    
-    
 {% endblock %}

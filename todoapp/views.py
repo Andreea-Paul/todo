@@ -75,10 +75,10 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                messages.info(request, "User loged-in")
+                messages.info(request, "You are loged-in")
                 return redirect('home')
             else:
-                messages.error(request, "Username/password is wrong")
+                messages.error(request, "The username/password is wrong")
     form = LoginForm()
     return render(request, "login_page.html", {"form": form})  
 

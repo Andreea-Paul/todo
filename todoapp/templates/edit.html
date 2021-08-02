@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<div style='text-align: left;padding-left: 570px;padding-right: 570px; height: 635px;'>
+<div style='text-align: left;padding-left: 570px;padding-right: 569px; height: 635px;'>
   <h1 style="font-size: 30px;height: 70px;"><b>Edit Task</b></h1>
   <form method="POST" action="">
       {% csrf_token %}
       <div class="control">
         <input class="input" name ="task" type="text" placeholder="{{ todo_form.task }}">
       </div>
-      <p>Choose a category for your task:
-        {{ todo_form.category}} 
+      <p>Change the category for your task:
+        {{ todo_form.category }} 
       </p>
       <p>
-        Choose a due date for your task:
-        {{ todo_form.due_date  }}
+        Change the due date for your task:
+        {{ todo_form.due_date }}
       </p>
-      
       <div class="field">
           <p class="control">
             <button class="button is-link">
-              Add Task
+              Edit 
             </button>
           </p>
       </div> 
@@ -28,10 +27,5 @@
     <a class="button" href="{% url 'home' %}">Back</a>
   {% endif %}
   </p>
-
-        
-    
-
 </div>
-
 {% endblock %}

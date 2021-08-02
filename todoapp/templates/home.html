@@ -15,9 +15,9 @@
 </div>
 </div>
 <div>
-    <a class = 'button is-link' href="{% url 'add_task' %}"><b>Add task</b></a>
+    <a class = 'button is-link' href="{% url 'add_task' %}"><b>Add Task</b></a>
 </div>
-
+<div style="height:auto; color: brown;">
 <section class="section">
     {% if messages %}
             {% for message in messages %}
@@ -81,5 +81,6 @@
     </table>
 </section>
 </div>
+
 
 {% endblock %}
