@@ -25,7 +25,18 @@
     </form>
     {% if request.user.is_authenticated %}
     <a class="button" href="{% url 'home' %}">Back</a>
-    {% endif %}        
+    {% endif %} 
+    <div>
+      {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div style="color:red">
+              {{ message }}
+          </div>
+          {% else %}
+              {{ message }}
+          {% endif %}
+      {% endfor %}
+    </div>       
 </div>    
     
 {% endblock %}

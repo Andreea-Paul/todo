@@ -24,6 +24,9 @@ def add_task(request):
             todo_form.save()
             messages.success(request, ('Task has been added!'))
             return redirect('home')
+        else:
+            messages.success(request, ('You must choose a date from today forward!'))
+
     return render(request, 'add_task.html', {'todo_form': todo_form})
             
             
