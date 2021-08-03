@@ -78,7 +78,7 @@ def login_view(request):
                 messages.info(request, "You are loged-in")
                 return redirect('home')
             else:
-                messages.error(request, "The username/password is wrong")
+                messages.error(request, "The username/password is incorrect!")
     form = LoginForm()
     return render(request, "login_page.html", {"form": form})  
 

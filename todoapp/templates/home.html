@@ -6,7 +6,7 @@
     <h1 style="font-size: 40px;"><b>Welcome, {{ user.username }}</b></h1>
 {% endif %} 
 {% if request.user.is_authenticated %}
-    <a href="{% url 'logout' %}"><b>Logout</b></a>
+    <a href="{% url 'logout' %}"><b>Log-out</b></a>
 {% endif %} 
 <div>
 {% if request.user.is_authenticated %}
